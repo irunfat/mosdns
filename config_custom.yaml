@@ -177,15 +177,15 @@ plugins:
       - matches: qname $geosite_gfw
         exec: $query_nocn
       - exec: jump has_resp_main
-      # 3. 非 CN 域名 → 国外 (范围更广，优先匹配)
+      # 2. 非 CN 域名 → 国外 (范围更广，优先匹配)
       - matches: qname $geosite_location-!cn
         exec: $query_nocn
       - exec: jump has_resp_main
-      # 4. CN 域名 → CN
+      # 3. CN 域名 → CN
       - matches: qname $geosite_cn
         exec: $query_cn
       - exec: jump has_resp_main
-      # 5. Fallback (未知域名，严格走国外)
+      # 3. Fallback (未知域名，严格走国外)
       - exec: $no_ecs
       - exec: $query_fallback
       - exec: jump has_resp_main
@@ -201,8 +201,8 @@ plugins:
   - type: udp_server
     args:
       entry: sequence
-      listen: :5333
+      listen: :5335
   - type: tcp_server
     args:
       entry: sequence
-      listen: :5333
+      listen: :5335
